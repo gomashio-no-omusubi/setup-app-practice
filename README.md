@@ -42,18 +42,24 @@ git clone git@github.com:gomashio-no-omusubi/setup-app-practice.git
 cd setup-app-practice
 ```
 
-### 3. 依存パッケージ（Laravel Sail等）の一括インストール
+### 3. 環境設定ファイルの作成
+
+```bash
+cp .env.example .env
+```
+
+### 4. 依存パッケージ（Laravel Sail等）の一括インストール
 
 ```bash
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
-    laravelsail/php82-composer:latest \
+    laravelsail/php85-composer:latest \
     composer install
 ```
 
-### 4. Dockerコンテナの起動
+### 5. Dockerコンテナの起動
 
 ```bash
 ./vendor/bin/sail up -d
@@ -61,19 +67,19 @@ docker run --rm \
 
 _※ コンテナが完全に起動するまで、スペックにより数十秒〜数分かかる場合があります。_
 
-### 5. アプリケーションキーの生成
+### 6. アプリケーションキーの生成
 
 ```bash
 ./vendor/bin/sail artisan key:generate
 ```
 
-### 6. マイグレーションとシーディングの実行
+### 7. マイグレーションとシーディングの実行
 
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
 
-### 7. ブラウザでのアクセス確認
+### 8. ブラウザでのアクセス確認
 
 コンテナ起動後、ブラウザで以下のURLにアクセスし、Laravelの初期画面が表示されることを確認してください。
 
